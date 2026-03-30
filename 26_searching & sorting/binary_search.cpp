@@ -1,34 +1,5 @@
 // Binary Search (brief and clear)
-
-// Binary Search is used to find an element in a sorted array by repeatedly dividing the search space into half.
-
-// How it works
-
-// Take two pointers: left and right
-
-// Find the middle index mid
-
-// Compare target with arr[mid]
-
-// If equal, return mid
-
-// If target is smaller, search left half
-
-// If target is larger, search right half
-
-// Repeat until left > right
-
-// Key requirements
-
-// Array must be sorted
-
-// Works only on random access data structures (like arrays, vectors)
-
-// Time and space complexity
-
-// Time: O(log n)
-
-// Space: O(1) (iterative version)
+ 
 
 
 

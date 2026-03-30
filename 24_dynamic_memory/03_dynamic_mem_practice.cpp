@@ -5,14 +5,14 @@
 
  int main(){
 
-    int *array1 = nullptr;
+    // int *array1 = nullptr;  OR USE
     // int* array1 = nullptr;    //both will work
     
     int size;
     cout<<"enter the size you want for the array : ";
     cin>>size;
 
-    array1 = new int[size] ; 
+    int *array1 = new int[size] ; 
     
 
 

@@ -12,12 +12,12 @@ int main(){
 // there is no point of allocating memory dynamically (no point of using dynamic memory), that can be done normally.
 //we would like to allocate dynamic memory, when we dont know what the size is gonna be.
 
-char *pGrades = nullptr;
+// char *pGrades = nullptr;   // OR USE LINE 20
 int size;
 cout<<"input the number of grades you want to enter: "<<endl;
 cin>>size;
 
-pGrades = new char[size];    // allocates memory in heap instead of stack for an array.
+char *pGrades = new char[size];    // allocates memory in heap instead of stack for an array.
 
 for(int i=0;i<size;i++){
 
@@ -36,3 +36,8 @@ delete []pGrades;
 
 return 0;
 }
+
+
+
+int *p = new int[size];    // dynamic allocation - array
+int *p = new int(21)   // integer

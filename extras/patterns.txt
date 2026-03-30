@@ -1,0 +1,32 @@
+patterns
+ 
+
+greedy - You make the best possible decision at the current moment, without worrying about future choices, and trust that these local choices lead to the global best answer.
+How to recognize a greedy problem
+
+Look for:
+“maximum” or “minimum”
+“one pass”
+“best so far”
+“locally optimal”
+no need to revisit old decisions
+
+
+
+
+- problem -> brute - info - info , better -  info - info , optimal -  info - info
+for() -> iterating in the array
+
+
+- Best Time to Buy and Sell Stock  -> greedy - INT_MAX
+- missing element in an array -> two nested loops to search for missing element (1-N) (1-N-1) , hashing approach , xor operation (xor1^xor2) , (totalsum)-(arraysum)
+- maximum consecutive 1's -> better -> int j=0; for() arr[0]==0; j=0 push back in temp. otherwise j++; again when we get zero. push back j and update j to 0.
+- an array have elements, all appear twice, except one element, find that element -> nested loop , hashing , xor operation
+- length of longest subarray with sum k -> sliding window
+- count of total number of subarrays with sum k -> prefix sum + hashing 
+-two sum -> hash mapping of compliment 
+-majority element -> traditional nested loops. count>n/2; return i , hashing , moore's voting algorithm 
+-sort colours -> merge sort , counter c1,c2,c3 each for 0,1,2 then update array , dutch national flag algorithm
+-
+
+

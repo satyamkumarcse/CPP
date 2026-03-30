@@ -14,7 +14,7 @@ int main(){
     // here a problem will arise, my array is itself an address (--23), so there is no need to use ampersand {addressof operator (&) }
 
 
-    string *pFreePizzas = freepizzas;
+    string *pFreePizzas = freepizzas;  // the pointer by default points at first element 
 
 
 

@@ -34,7 +34,7 @@ i cant code:
 int n;
 cin >> n;
 cout<<x;
-int arr[n];   // ❌ not standard C++
+int arr[n];   // ❌ not standard C++ (it works in my compiler, but wont be accepted universally)
 
 short lifetime: 
 

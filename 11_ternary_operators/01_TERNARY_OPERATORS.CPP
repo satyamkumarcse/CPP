@@ -59,17 +59,17 @@ using namespace std;
 // }
 
 
-// int main(){
+int main(){
 
-//     bool hungry = true;
-//     // bool hungry = false;
+    bool hungry = true;
+    // bool hungry = false;
 
-//     // hungry == true ? cout<<"you are hungry" : cout<<"you are full"; (in case of bool, many ways are correct)
-//     hungry ? cout<<"you are hungry" : cout<<"you are full";
-//     std::cout<<( hungry? "you are hungry" : "you are full");
+    // hungry == true ? cout<<"you are hungry" : cout<<"you are full"; (in case of bool, many ways are correct)
+    hungry ? cout<<"you are hungry" : cout<<"you are full";
+    std::cout<<( hungry? "you are hungry" : "you are full");
 
-//     return 0;
-// }
+    return 0;
+}
 
 
 

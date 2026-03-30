@@ -35,3 +35,77 @@ public:
         return nums;
     }
 };
+
+
+
+
+
+#include <stdio.h>
+
+int main(){
+    
+    int arr[12];
+    int sum=0;
+
+    int min = -99999;
+    int max = 99999;
+    int arrmonth[12];
+    for(int i=0;i<12;i++){
+
+        scanf("%d",&arr[i]);
+        if(arr[i]<0){
+            printf("Invalid input");
+            return 0;
+        }
+        else{
+             sum+=arr[i];
+            
+        }
+        
+        if(arr[i]>min){
+            min = arr[i];
+        }
+        
+        if(arr[i]<max){
+            max=arr[i];
+        }
+       
+        
+    }
+    
+    for(int i=1;i<=12;i++){
+        arrmonth[i-1]=i;
+        
+    }
+    printf("Total rainfall : %d\n",sum);
+    printf("Average rainfall : %d\n",sum/12);
+
+    
+    for(int i=0;i<12;i++){
+        
+        
+        if(max!=arr[i]){
+            continue;
+        }
+        else{
+            printf("lowest rainfall month : %d\n",arrmonth[i]);
+        }
+        
+    }
+    
+      for(int i=0;i<12;i++){
+        
+        
+    
+      if(min!=arr[i]){
+            continue;
+        }
+    
+    else{
+            printf("Highest rainfall month : %d\n",arrmonth[i]);
+        }
+        
+      }
+    
+    return 0;
+}

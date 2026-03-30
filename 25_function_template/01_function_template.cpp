@@ -6,24 +6,91 @@
 // Naming functions max, min, count is dangerous.
 
 
+
+// quick revision
+
+
+
+
+// Function Overloading (Quick Revision)
+// Definition
+
+// Function overloading means same function name, different parameter list.
+// The compiler decides which function to call based on the arguments. This is called compile time polymorphism.
+
+
+#include <iostream>
+using namespace std;
+
+int add(int a, int b){
+    return a + b;
+}
+
+double add(double a, double b){
+    return a + b;
+}
+
+int main(){
+    cout << add(2, 3) << endl;      // calls int version
+    cout << add(2.5, 3.5) << endl;  // calls double version
+}
+
+
+
+/*
+shows error: 
+
+int func(int a){
+    return a;
+}
+
+double func(int a){   // ERROR
+    return a;
+}
+    
+
+// as parameter type is similar 
+
+*/
+
+
+
+/*Function overloading requires:
+
+Same function name
+
+Different number of parameters OR
+Different parameter types OR
+Different order of parameters
+
+Not allowed:
+
+*/
+
+
+
+
+
+
+
 #include <iostream>
 using namespace std;
 
 int maxele(int x,int y){      
 
-    return (x>y) ? x: y;
+    return (x>y) ? x : y;
 
 }
 
 double maxele(double x,double y){      
 
-    return (x>y) ? x: y;
+    return (x>y) ? x : y;
 
 }
 
 char maxele(char x,char y){      
 
-    return (x>y) ? x: y;
+    return (x>y) ? x : y;
 
 }
 

@@ -29,7 +29,7 @@ int main(){
 
     // or directly write
 
-    int *pnum = new int;
+    int *pnum = new int(21);
 
 
 
@@ -41,7 +41,7 @@ int main(){
 
     // later on in a program, whenever you would like to store value, we can use the derefrence operator. 
 
-    *pnum = 21;
+    // *pnum = 21;
 
     cout<<"memory address is: "<<pnum<<endl;
     cout<<"value stored inside it is: "<<*pnum<<endl;
@@ -53,7 +53,6 @@ int main(){
     delete pnum;           // we are freeing up the memory at this address.
 
     // if we dont do this, it may cause a memory leak. so its best to avoid that.
-
 
     return 0;
 }
