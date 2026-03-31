@@ -663,33 +663,20 @@ int main() {
 
 // single linked list 
 
-
-
-// inserting at end,searching for an ele,displaying LL elements
 #include <iostream>
-#include <cstdlib>
 using namespace std;
 
-typedef struct node {
+struct node {
     int data;
-    struct node *next;
-} node;
+    node* next;
+};
 
-node *head = NULL;
-
-/*
-Question 1:
-Create the single linked list with elements
-100, 20, 35, 30, 45, 40, 50, 80, 10, 90, 75
-
-Display it.
-Find the element 90 & 200 and display result.
-*/
+node* head = NULL;
 
 // Insert at end
 void insertEnd(int element) {
 
-    node *newnode = (node *)malloc(sizeof(node));
+    node* newnode = new node;
     newnode->data = element;
     newnode->next = NULL;
 
@@ -698,7 +685,7 @@ void insertEnd(int element) {
         return;
     }
 
-    node *ptr = head;
+    node* ptr = head;
     while (ptr->next != NULL) {
         ptr = ptr->next;
     }
@@ -709,23 +696,23 @@ void insertEnd(int element) {
 // Search element
 void search(int key) {
 
-    node *ptr = head;
+    node* ptr = head;
 
     while (ptr != NULL) {
         if (ptr->data == key) {
-            cout << "Element " << key << " found" << endl;
+            cout << "Element " << key << " found\n";
             return;
         }
         ptr = ptr->next;
     }
 
-    cout << "Element " << key << " not found" << endl;
+    cout << "Element " << key << " not found\n";
 }
 
 // Display
 void display() {
 
-    node *ptr = head;
+    node* ptr = head;
 
     while (ptr != NULL) {
         cout << ptr->data << " ";
@@ -752,7 +739,6 @@ int main() {
 
     return 0;
 }
-
 
 // deleting first occurence of an ele in a singly LL 
 
