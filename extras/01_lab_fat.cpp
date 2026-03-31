@@ -740,7 +740,7 @@ int main() {
     return 0;
 }
 
-// deleting first occurence of an ele in a singly LL 
+// deleting first occurence of an ele in a singly LL (as cases of deletion)
 
 void deleteNode(int element) {
 
@@ -755,7 +755,7 @@ void deleteNode(int element) {
     // if head needs to be deleted
     if (head->data == element) {
         head = head->next;
-        free(ptr);
+        delete ptr;
         cout << "Deleted: " << element << endl;
         return;
     }
@@ -772,29 +772,34 @@ void deleteNode(int element) {
     }
 
     prev->next = ptr->next;
-    free(ptr);
+    delete ptr;
 
     cout << "Deleted: " << element << endl;
 }
 
-// insering at begening 
 
+// insering at begening 
 void insertFirst(int element) {
 
-    node *newnode = (node *)malloc(sizeof(node));
+    node *newnode = new node;
     newnode->data = element;
 
     newnode->next = head;
     head = newnode;
 }
 
-
-
 // inserting at middle, after a particular pos (1 based index)
 
+/*
+
+      Meaning	               Loop condition
+Insert at position pos	         count < pos - 1
+Insert after position pos	     count < pos
+
+*/
 void insertMiddle(int element, int pos) {
 
-    node *newnode = (node *)malloc(sizeof(node));
+    node *newnode = new node;
     newnode->data = element;
     newnode->next = NULL;
 
@@ -809,14 +814,14 @@ void insertMiddle(int element, int pos) {
     int count = 1;
 
     // move to (pos-1)th node
-    while (ptr != NULL && count < pos - 1) {
+    while (ptr != NULL && count < pos ) {
         ptr = ptr->next;
         count++;
     }
 
     if (ptr == NULL) {
         cout << "Invalid position\n";
-        free(newnode);
+        delete newnode;
         return;
     }
 
@@ -825,33 +830,29 @@ void insertMiddle(int element, int pos) {
 }
 
 
+// inserting after an element "key"
+void insertAfterElement(int element, int key) {
 
-
-
-// inserting at middle (after a particular ele)
-
-
-void insertMiddle(int element, int pos) {
-
-    node *newnode = (node *)malloc(sizeof(node));
+    node *newnode = new node;
     newnode->data = element;
     newnode->next = NULL;
 
     if (head == NULL) {
         cout << "List is empty\n";
+        delete newnode;
         return;
     }
 
     node *ptr = head;
 
-    // search for element = pos
-    while (ptr != NULL && ptr->data != pos) {
+    // search for the given element (key)
+    while (ptr != NULL && ptr->data != key) {
         ptr = ptr->next;
     }
 
     if (ptr == NULL) {
-        cout << "Element " << pos << " not found\n";
-        free(newnode);
+        cout << "Element " << key << " not found\n";
+        delete newnode;
         return;
     }
 
@@ -859,11 +860,6 @@ void insertMiddle(int element, int pos) {
     newnode->next = ptr->next;
     ptr->next = newnode;
 }
-
-
-
-
-
 
 // double linked list 
 
