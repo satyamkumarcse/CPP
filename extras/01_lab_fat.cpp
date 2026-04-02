@@ -211,7 +211,7 @@ void search(int key, int *stack, int top) {
 }
 
 // --------- Required Part (ii) ---------
-void removeLargest(int *stack, int &top) {
+void removeLargest(int *stack, int &top) {  // STRICT STACK principle is not followed here, only the largest ele is removed. (dont write in exam)
 
     if (top == -1) {
         cout << "stack is empty!\n";
@@ -252,6 +252,36 @@ void removeLargest(int *stack, int &top) {
 
     cout << "largest element removed: " << maxVal << endl;
 }
+
+
+void removeLargest(int *stack, int &top) {
+
+    if (top == -1) {
+        cout << "Stack is empty!\n";
+        return;
+    }
+
+    // Step 1: Find max (need to scan, so use temp variable index)
+    int maxVal = stack[0];
+    for (int i = 0; i <= top; i++) {
+        if (stack[i] > maxVal) {
+            maxVal = stack[i];
+        }
+    }
+
+    // Step 2: Pop until max is found (strict removal)
+    while (top != -1) {
+        int val = pop(stack, top);
+
+        if (val == maxVal) {
+            // found max, stop here
+            return;
+        }
+        // else: discard element permanently
+    }
+}
+
+
 
 int main() {
 
@@ -740,7 +770,7 @@ int main() {
     return 0;
 }
 
-// deleting first occurence of an ele in a singly LL (as cases of deletion)
+// deleting first occurence of an ele in a singly LL (all cases of deletion) 
 
 void deleteNode(int element) {
 
@@ -875,25 +905,22 @@ Display it.
 
 Delete the elements 90 & 80 and display the result.
 */
-
-
 #include <iostream>
-#include <cstdlib>
 using namespace std;
 
-typedef struct dnode {
+struct node {
     int data;
-    struct dnode *prev;
-    struct dnode *next;
-} dnode;
+    node *prev;
+    node *next;
+};
 
-dnode *head = NULL;
+node *head = NULL;
 
 
 // insert at end
 void insertEnd(int element) {
 
-    dnode *newnode = (dnode *)malloc(sizeof(dnode));
+    node *newnode = new node;
     newnode->data = element;
     newnode->prev = NULL;
     newnode->next = NULL;
@@ -903,7 +930,7 @@ void insertEnd(int element) {
         return;
     }
 
-    dnode *ptr = head;
+    node *ptr = head;
 
     while (ptr->next != NULL) {
         ptr = ptr->next;
@@ -913,7 +940,22 @@ void insertEnd(int element) {
     newnode->prev = ptr;
 }
 
-// delete first occurrence (delete all cases)
+
+// 
+#include <iostream>
+using namespace std;
+
+struct node {
+    int data;
+    node *prev;
+    node *next;
+};
+
+node *head = NULL;
+// 
+
+
+
 void deleteNode(int element) {
 
     if (head == NULL) {
@@ -921,47 +963,54 @@ void deleteNode(int element) {
         return;
     }
 
-    dnode *ptr = head;
+    node *ptr = head;
 
-    // delete head
-    if (head->data == element) {
-        head = head->next;
+    // traverse to find element
+    while (ptr != NULL && ptr->data != element) {
+        ptr = ptr->next;
+    }
+
+    // element not found
+    if (ptr == NULL) {
+        cout << "Data not found\n";
+        return;
+    }
+
+    // case 1: deleting head
+    if (ptr == head) {
+        head = ptr->next;
 
         if (head != NULL) {
             head->prev = NULL;
         }
 
-        free(ptr);
+        delete ptr;
         cout << "Deleted: " << element << endl;
         return;
     }
 
-    // search node
-    while (ptr != NULL && ptr->data != element) {
-        ptr = ptr->next;
+    // case 2: middle or last node
+    node *pptr = ptr->prev;
+    node *nptr = ptr->next;
+
+    // link previous node to next node
+    pptr->next = nptr;
+
+    // if not last node
+    if (nptr != NULL) {
+        nptr->prev = pptr;
     }
 
-    if (ptr == NULL) {
-        cout << "Element " << element << " not found\n";
-        return;
-    }
-
-    if (ptr->next != NULL) {
-        ptr->next->prev = ptr->prev;
-    }
-
-    if (ptr->prev != NULL) {
-        ptr->prev->next = ptr->next;
-    }
-
-    free(ptr);
+    delete ptr;
     cout << "Deleted: " << element << endl;
 }
+
+
 
 // display
 void display() {
 
-    dnode *ptr = head;
+    node *ptr = head;
 
     while (ptr != NULL) {
         cout << ptr->data << " ";
@@ -997,12 +1046,20 @@ int main() {
 
 
 
+#include <iostream>
+using namespace std;
 
-// insert all cases , 2D-LL
+struct node {
+    int data;
+    node *prev;
+    node *next;
+};
 
-void insertUniversal(int element, int pos) {
+node *head = NULL;
 
-    struct dnode *newnode = (struct dnode *)malloc(sizeof(struct dnode));
+void insert(int element, int pos) {
+
+    node *newnode = new node;
     newnode->data = element;
     newnode->prev = NULL;
     newnode->next = NULL;
@@ -1013,7 +1070,7 @@ void insertUniversal(int element, int pos) {
         return;
     }
 
-    struct dnode *ptr = head;
+    node *ptr = head;
 
     // case 2: insert at beginning (if pos matches head)
     if (head->data == pos) {
@@ -1023,13 +1080,13 @@ void insertUniversal(int element, int pos) {
         return;
     }
 
-    // case 3: search for position
-    while (ptr != NULL && ptr->data != pos) {
+    // case 3: traverse to find pos
+    while (ptr->next != NULL && ptr->data != pos) {
         ptr = ptr->next;
     }
 
-    // case 4: if element found → insert after it
-    if (ptr != NULL) {
+    // case 4: insert after found node
+    if (ptr->data == pos) {
 
         newnode->next = ptr->next;
         newnode->prev = ptr;
@@ -1041,24 +1098,15 @@ void insertUniversal(int element, int pos) {
         ptr->next = newnode;
     }
     else {
-        // case 5: insert at end (pos not found)
-        ptr = head;
-
-        while (ptr->next != NULL) {
-            ptr = ptr->next;
-        }
-
-        ptr->next = newnode;
-        newnode->prev = ptr;
+        // case 5: element not found
+        cout << "Position element not found\n";
+        delete newnode;  // avoid memory leak
     }
-}
+}  
 
 
+// sorting 
 
-
-
-
-// sorting  
 
 
 // selection sort 
