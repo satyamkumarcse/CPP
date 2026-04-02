@@ -1057,6 +1057,8 @@ struct node {
 
 node *head = NULL;
 
+
+// 2D ll - all cases of insert 
 void insert(int element, int pos) {
 
     node *newnode = new node;
@@ -1156,11 +1158,9 @@ using namespace std;
 void insertionsort(int arr[], int x) {
 
     int i, j;
-
-    for (i = 0; i <= x - 1; i++) {
-
+    
+    for (i = 1; i < x ; i++) {   // first ele is sorted itself, so i =1.
         j = i;
-
         while (j > 0 && arr[j - 1] > arr[j]) {
 
             int temp = arr[j];
@@ -1188,10 +1188,9 @@ int main() {
 
 
 
-
 // quick sort 
 
-#include <bits/stdc++.h>
+#include <iostream>
 using namespace std;
 
 int fxnpvt(int arr[], int low, int high) {
@@ -1211,9 +1210,9 @@ int fxnpvt(int arr[], int low, int high) {
         }
 
         if (i < j) {
-            int temp = arr[j];
-            arr[j] = arr[i];
-            arr[i] = temp;
+            int temp = arr[i];
+            arr[i] = arr[j];
+            arr[j] = temp;
         }
     }
 
@@ -1238,11 +1237,11 @@ void qs(int arr[], int low, int high) {
 int main() {
 
     int arr[] = {4, 6, 2, 5, 7, 9, 1, 3};
-
+   
     int n = sizeof(arr) / sizeof(arr[0]);
+     int low = 0;
+    int high = n-1;
 
-    int low = 0;
-    int high = n - 1;
 
     qs(arr, low, high);
 
@@ -1256,7 +1255,6 @@ int main() {
 
 
 
-// tree traversal,binary search tree and binary search  
 
 
 // tree traversal on binary tree
@@ -1340,7 +1338,9 @@ int main() {
 
 
 
-// operations on BST 
+// operations on BST (binary search tree)
+// (left child < parent < right child) rule is followed everywhere in BST
+
 #include <iostream>
 using namespace std;
 
@@ -1352,7 +1352,7 @@ struct node {
 
 // create node
 node* newNode(int val) {
-    node* n = new node();
+    node* n = new node;
     n->data = val;
     n->left = nullptr;
     n->right = nullptr;
@@ -1465,7 +1465,7 @@ node* deleteNode(node* root, int key) {
         }
 
         // Case 3: 2 children
-        node* temp = root->right;                                                                                   
+        node* temp = root->right;  // basically delete the smallest node in the right subtree                                                                            
 
         while (temp->left != nullptr) {
             temp = temp->left;
@@ -1582,7 +1582,7 @@ int countNodes(node* root) {
     return 1 + countNodes(root->left) + countNodes(root->right);
 }
 
-// left subtree
+// left subtree (uses total nodes code,written above)
 void countLeftSubtree(node* root) {
 
     if (root == NULL) {
