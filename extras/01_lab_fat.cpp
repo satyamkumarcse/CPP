@@ -844,7 +844,7 @@ void insertMiddle(int element, int pos) {
     int count = 1;
 
     // move to (pos-1)th node
-    while (ptr != NULL && count < pos ) {
+    while (ptr != NULL && count < pos - 1 ) {
         ptr = ptr->next;
         count++;
     }
@@ -965,7 +965,7 @@ void deleteNode(int element) {
 
     node *ptr = head;
 
-    // traverse to find element
+    // traverse to find element 
     while (ptr != NULL && ptr->data != element) {
         ptr = ptr->next;
     }
@@ -1122,7 +1122,7 @@ void selectionsort(int arr[], int x) {
         int min = i;
 
         for (int j = i + 1; j < x; j++) {
-            if (arr[j] < arr[min]) {
+            if (arr[min] > arr[j]) {
                 min = j;
             }
         }
@@ -1131,6 +1131,7 @@ void selectionsort(int arr[], int x) {
         arr[i] = arr[min];
         arr[min] = temp;
     }
+
 }
 
 int main() {
@@ -1159,8 +1160,8 @@ void insertionsort(int arr[], int x) {
 
     int i, j;
     
-    for (i = 1; i < x ; i++) {   // first ele is sorted itself, so i =1.
-        j = i;
+    for (i = 1; i < x ; i++) {   // first ele is sorted itself, so i = 1.
+        j = i; 
         while (j > 0 && arr[j - 1] > arr[j]) {
 
             int temp = arr[j];
@@ -1171,6 +1172,7 @@ void insertionsort(int arr[], int x) {
         }
     }
 }
+
 
 int main() {
 
@@ -1184,74 +1186,6 @@ int main() {
         cout << arr[i] << " ";
     }
 }
-
-
-
-
-// quick sort 
-
-#include <iostream>
-using namespace std;
-
-int fxnpvt(int arr[], int low, int high) {
-
-    int pivot = arr[low];
-    int i = low;
-    int j = high;
-
-    while (i < j) {
-
-        while (i <= high - 1 && arr[i] <= pivot) {
-            i++;
-        }
-
-        while (j >= low + 1 && arr[j] > pivot) {
-            j--;
-        }
-
-        if (i < j) {
-            int temp = arr[i];
-            arr[i] = arr[j];
-            arr[j] = temp;
-        }
-    }
-
-    int temp = arr[j];
-    arr[j] = arr[low];
-    arr[low] = temp;
-
-    return j;
-}
-
-void qs(int arr[], int low, int high) {
-
-    if (low < high) {
-
-        int pivot = fxnpvt(arr, low, high);
-
-        qs(arr, low, pivot - 1);
-        qs(arr, pivot + 1, high);
-    }
-}
-
-int main() {
-
-    int arr[] = {4, 6, 2, 5, 7, 9, 1, 3};
-   
-    int n = sizeof(arr) / sizeof(arr[0]);
-     int low = 0;
-    int high = n-1;
-
-
-    qs(arr, low, high);
-
-    for (int i = 0; i < n; i++) {
-        cout << arr[i] << " ";
-    }
-
-    return 0;
-}
-
 
 
 
@@ -1312,7 +1246,7 @@ void printPostorder(node* root) {
 int main() {
 
  
-      node* root = newnode(10);
+    node* root = newnode(10);
     root->left = newnode(5);
     root->right = newnode(12);
     root->left->left=newnode(2);
@@ -1376,8 +1310,8 @@ node* newNode(int val) {
 
 
 
-node* insertIterative(node* root, int element)
-{
+node* insertIterative(node* root, int element) {
+
     node* newnode = newNode(element);
 
     if (root == NULL)
@@ -1403,13 +1337,13 @@ node* insertIterative(node* root, int element)
             }
         }
 
-        if (parentnode->data < newnode->data)
+        if (newnode->data < parentnode->data)
         {
-            parentnode->right = newnode;
+            parentnode->left = newnode;
         }
         else
         {
-            parentnode->left = newnode;
+            parentnode->right = newnode;
         }
     
 
@@ -1447,7 +1381,7 @@ node* deleteNode(node* root, int key) {
     if (key < root->data) {
         root->left = deleteNode(root->left, key);
     }
-    else if (key > root->data) {
+    else if (key > root->data) { 
         root->right = deleteNode(root->right, key);
     }
     else {
@@ -1782,6 +1716,131 @@ int main() {
     findTwoMin(root);
     findTwoMax(root);
     findParent(root, 68);
+
+    return 0;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+// circular queue
+
+
+
+#include <iostream>
+using namespace std;
+
+#define MAX 10
+
+int Q[MAX];
+int front = -1;
+int rear = -1;
+
+// ENQUEUE
+void enqueue(int element)
+{
+    // Correct full condition
+    if (front == (rear + 1) % MAX)
+    {
+        cout << "Queue is full" << endl;
+    }
+    else
+    {
+        rear = (rear + 1) % MAX;
+        Q[rear] = element;
+
+        if (front == -1)
+        {
+            front = 0;
+        }
+
+    }
+}
+
+// DEQUEUE
+void dequeue()
+{
+    if (front == -1)
+    {
+        cout << "Queue is empty" << endl;
+        return;
+    }
+
+    int del_element = Q[front];
+    cout << "Deleted element: " << del_element << endl;
+
+    if (front == rear)
+    {
+        front = -1; 
+        rear = -1;
+          
+          /*front == rear → exactly one element present
+After removing that element → queue becomes empty → set both to -1*/
+      
+    }
+    else
+    {
+        front = (front + 1) % MAX;
+    }
+
+    return;
+}
+
+
+
+// DISPLAY
+void display()
+{
+    if (front == -1)
+    {
+        cout << "Queue is empty" << endl;
+        return;
+    }
+
+    int temp = front;
+
+    while (true)
+    {
+        cout << Q[temp] << " ";
+
+        if (temp == rear)
+        {
+            break;
+        }
+
+        temp = (temp + 1) % MAX;
+    }
+
+    cout << endl;
+}
+
+
+
+
+// DRIVER
+int main()
+{
+    enqueue(10);
+    enqueue(20);
+    enqueue(30);
+
+    display();
+
+    dequeue();
+    display();
+
+    enqueue(40);
+    enqueue(50);
+
+    display();
 
     return 0;
 }
